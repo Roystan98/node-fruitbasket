@@ -1,6 +1,7 @@
 // run `node index.js` in the terminal
 const express = require('express');
 let pieRepo = require('./repos/pieRepo');
+let errorHelpers = require('./helpers/errorHelpers');
 let app = express();
 
 let router = express.Router();
@@ -190,6 +191,34 @@ router.delete('/:id', function (req, res, next) {
 
 app.use('/api/', router);
 
+app.use(errorHelpers.logErrorToConsole());
+app.use(errorHelpers.clientErrorHandler());
+app.use(errorHelpers.errorHandler());
+// function errorBuilder(err) {
+//   return {
+//     status: 500,
+//     statusText: 'Internal Server Error',
+//     message: err.message,
+//     error: {
+//       errno: err.errno,
+//       call: err.syscall,
+//       code: 'INTERNAL_SERVER_ERROR',
+//       message: err.message,
+//     },
+//   };
+// }
+
+// // Custom exception handler
+// app.use(function (err, req, res, next) {
+//   console.log(errorBuilder(err));
+//   next(err);
+// });
+
+// app.use(function (err, req, res, next) {
+//   res.status(500).json(errorBuilder(err));
+// });
+
+//running the server
 var server = app.listen(5000, function () {
   console.log('Node server 2');
 });
