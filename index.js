@@ -192,6 +192,7 @@ router.delete('/:id', function (req, res, next) {
 app.use('/api/', router);
 
 app.use(errorHelpers.logErrorToConsole());
+app.use(errorHelpers.logErrorToFiles());
 app.use(errorHelpers.clientErrorHandler());
 app.use(errorHelpers.errorHandler());
 // function errorBuilder(err) {
