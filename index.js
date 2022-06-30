@@ -1,21 +1,24 @@
 // run `node index.js` in the terminal
 const express = require('express');
+let pieRepo = require('./repos/pieRepo');
 let app = express();
 
 let router = express.Router();
 
-let pies = [
-  { id: 1, name: 'Mango' },
-  { id: 2, name: 'Cherry' },
-  { id: 3, name: 'Orange' },
-];
 router.get('/', function (req, res, next) {
-  res.status(200).json({
-    status: 200,
-    StatusText: 'OK',
-    message: 'All Ingredients Retrieved',
-    data: pies,
-  });
+  pieRepo.get(
+    function (data) {
+      res.status(200).json({
+        status: 200,
+        StatusText: 'OK',
+        message: 'All Ingredients Retrieved',
+        data: data,
+      });
+    },
+    function (err) {
+      next(err);
+    }
+  );
 });
 
 app.use('/api/', router);
