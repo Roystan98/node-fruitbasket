@@ -2,12 +2,13 @@
 const express = require('express');
 let pieRepo = require('./repos/pieRepo');
 let errorHelpers = require('./helpers/errorHelpers');
+const cors = require('cors');
 let app = express();
 
 let router = express.Router();
 
 app.use(express.json()); // for passing data
-
+//app.use(cors());
 // get all fruits from Basket
 router.get('/', function (req, res, next) {
   pieRepo.get(
@@ -191,10 +192,10 @@ router.delete('/:id', function (req, res, next) {
 
 app.use('/api/', router);
 
-app.use(errorHelpers.logErrorToConsole());
-app.use(errorHelpers.logErrorToFiles());
-app.use(errorHelpers.clientErrorHandler());
-app.use(errorHelpers.errorHandler());
+app.use(errorHelpers.logErrorToConsole);
+app.use(errorHelpers.logErrorToFiles);
+app.use(errorHelpers.clientErrorHandler);
+app.use(errorHelpers.errorHandler);
 // function errorBuilder(err) {
 //   return {
 //     status: 500,
