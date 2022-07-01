@@ -1,7 +1,7 @@
 let fs = require('fs');
 const { logErrorToConsole } = require('../helpers/errorHelpers');
 
-const FILE_NAME = './logs/log.txt';
+let FILE_NAME = './logs/log.txt';
 
 let logRepo = {
   write: function (data, resolve, reject) {

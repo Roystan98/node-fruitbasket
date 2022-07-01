@@ -5,7 +5,7 @@ let errorHelpers = {
     console.error(
       'Log Entry: ' + JSON.stringify(errorHelpers.errorBuilder(err))
     );
-    console.error('*', repeat(80));
+    console.error('*'.repeat(80));
     next(err);
   },
   logErrorToFiles: function (err, req, res, next) {
